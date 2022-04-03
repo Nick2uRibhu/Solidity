@@ -38,4 +38,9 @@ contract Spotify {
         count++;
         emit songCreated(count);
     }
+
+    function destroySong(uint256 c_ID) public onlyManager {
+        require(songDetails[c_ID].exist == true, "No such song exist!!");
+        delete songDetails[c_ID];
+    }
 }
