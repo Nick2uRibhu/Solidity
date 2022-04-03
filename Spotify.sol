@@ -43,4 +43,13 @@ contract Spotify {
         require(songDetails[c_ID].exist == true, "No such song exist!!");
         delete songDetails[c_ID];
     }
+
+    function listen(uint256 c_ID) public payable {
+        require(
+            msg.value >= songDetails[c_ID].price * 10**18,
+            "Have to contribute more to listen to this song!!"
+        );
+        songDetails[c_ID].listens++;
+        songDetails[c_ID].owner.transfer(msg.value);
+    }
 }
